@@ -6,28 +6,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePostAction, fetchPostDetailaction } from "../../Redux/slice/posts/postSlice";
 import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
+import AddComment from "../Comment/AddComment";
+import CommentsList from "../Comment/CommentsList";
 
 
  const PostDetails = (props) => {
   let { id } = useParams(); 
 
+  const post = useSelector(state => state?.post);
+  const userId = useSelector(state => state?.Users?.userAuth?.data?.user?._id);
+
+  const { postDetails, loading, appErr, serverErr, isDeleted } = post;
+  const comment = useSelector(state => state.comment);
+  const { commentCreated, commentDeleted } = comment;
+ 
+
   const dispatch = useDispatch();
+ 
 
   useEffect(() => {
 
     dispatch(fetchPostDetailaction(id));
 
-  }, [id, dispatch]);
+  }, [id, dispatch, commentCreated, commentDeleted]);
 
-  const post = useSelector(state => state?.post);
-  const userId = useSelector(state => state?.Users?.userAuth?.data?.user?._id);
-
-  const { postDetails, loading, appErr, serverErr, isDeleted } = post;
  
   if (isDeleted) return <Navigate to="/posts" />;
  
   const isCreatedBy = postDetails?.user?._id === userId
-  console.log("post098=sa==", id) 
+
   return (
     <>
     {loading ? (
@@ -73,8 +80,8 @@ import LoadingComponent from "../../utils/LoadingComponent";
           </div>
           {/* Post description */}
           <div className="max-w-xl mx-auto">
-            <div className="mb-6 text-left  text-xl text-gray-200">
-              {postDetails?.description}
+            <div className="mb-6 text-left  text-xl text-gray-200 ">
+             
             
               {/* Show delete and update btn if created user */}
              { isCreatedBy ? <div className="flex">
@@ -90,10 +97,10 @@ import LoadingComponent from "../../utils/LoadingComponent";
         </div>
       </div>
       {/* Add comment Form component here */}
-      
+      { userId ? <AddComment postId = {id} /> : null}
       <div className="flex justify-center  items-center">
         {/* <CommentsList comments={post?.comments} postId={post?._id} /> */}
-        CommentsList
+       < CommentsList comments ={postDetails?.comment} />
       </div>
       </section>
     )}

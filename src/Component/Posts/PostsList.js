@@ -16,7 +16,7 @@ export default function PostsList() {
   const category = useSelector(state => state?.category);
   const { categoryList, loading: categoryLoading, appErr: categoryappErr,  serverErr :categoryServerErr, } = category;
  
- 
+
 
  const dispatch = useDispatch();
   
@@ -82,9 +82,9 @@ export default function PostsList() {
                 {/* Post goes here */}
                 {appErr || serverErr ? <h1> Error </h1> :
                  postList?.length <=0 ?  <h1 className="text-yellow-400 text-lg text-center"> No Post Found </h1> : postList?.map((post, id) => (
-                         
+               
 <div className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6" key={id}>
-<div className="mb-10  w-full lg:w-1/4 px-3">
+<div className="mb-10  w-full lg:w-1/4">
   <Link to="#">
     {/* Post image */}
     <img
@@ -127,8 +127,7 @@ export default function PostsList() {
     {post?.title} 
     </h3>
   </Link>
-  <p className="text-gray-300">  {post?.description
-} </p>
+  <p className="text-gray-300">  {post?.description} </p>
   {/* Read more */}
   <Link to = {`/posts/${post?._id}`} className="text-indigo-500 hover:underline">
     Read More..

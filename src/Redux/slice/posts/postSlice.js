@@ -220,7 +220,7 @@ async (postId, {rejectWithValue, getState, dispatch}) =>{
     try{
 
         const { data } =  await axios.put( `${baseUrl}/api/posts/dislikes`, {postId}, config  );
-        console.log("data+++", postId)
+      
         return data
 
     }catch(error){

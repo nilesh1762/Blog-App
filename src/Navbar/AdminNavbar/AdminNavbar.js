@@ -27,13 +27,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ isLogin }) => {
 
   const dispatch = useDispatch();
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
+    
   ];
 
   return (
@@ -113,7 +114,7 @@ const AdminNavbar = () => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              // src={userAuth?.profilePhoto}
+                              src={isLogin?.profileImage}
                               alt="Admin Profile"
                             />
                           </Menu.Button>
