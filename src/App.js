@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import './App.css';
 import { BrowserRouter , Routes ,Route } from "react-router-dom";
 import HomePage from './Component/HomePage/HomePage';
@@ -17,9 +17,16 @@ import UpdatePost from './Component/Posts/UpdatePost';
 import UpdateComment from './Component/Comment/UpdateComment';
 import Profile from './Component/User/Profile/Profile';
 import UploadProfilePhoto from './Component/User/Profile/UploadProfilePhoto';
+import UpdateProfileForm from './Component/User/Profile/UpdateProfileForm';
+import SendEmail from './Component/User/Emailing/SendEmail';
+import AccountVerified from './Component/User/AccountVerification/AccountVerified';
+import UsersList from './Component/User/UsersList/UsersList';
+
 
 
 function App() {
+  const [getEmail, setEmail] = useState("")
+  
   return (
     
       <BrowserRouter>
@@ -31,7 +38,7 @@ function App() {
       <Route exact  path='/category-list'    element={ <CategoryList/>} />
       <Route exact path='/update-category/:id'   element={ <UpdateCategory/> } />
       <Route exact path='/add-category'   element={<AddNewCategory/>} />
-      
+      <Route exact path='/users'   element={<UsersList setEmail ={setEmail}/>} />
 
       </Route>
     
@@ -39,8 +46,11 @@ function App() {
       <Route exact path='/create-post'   element={<CreatePost/>} />
       <Route exact path='/update-post/:id'   element={<UpdatePost/>} />
       <Route exact path='/update-comment/:id'   element={<UpdateComment />} />
-      <Route exact path='/profile/:id'   element={<Profile />} />
-      <Route exact path='/upload-photo/:id'   element={<UploadProfilePhoto />} />
+      <Route exact path='/profile/:id'   element={<Profile setEmail ={setEmail}/>} />
+      <Route exact path='/upload-photo'   element={<UploadProfilePhoto />} />
+      <Route exact path='/update-profile/:id'   element={<UpdateProfileForm />} />
+      <Route exact path='/send-mail'   element={<SendEmail getEmail = {getEmail} />} />
+      <Route exact path='/verify-account/:token'   element={<AccountVerified  />} />
       </Route>
      
      

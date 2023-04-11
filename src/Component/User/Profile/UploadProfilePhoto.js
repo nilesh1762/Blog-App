@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-// import { uploadProfilePhototAction } from "../../../redux/slices/users/usersSlices";
+import { uploadProfilePhototAction } from "../../../Redux/slice/users/userSlices";
 
 //Css for dropzone
 const Container = styled.div`
@@ -35,15 +35,17 @@ export default function UploadProfilePhoto() {
       image: "",
     },
     onSubmit: values => {
-      // dispatch(uploadProfilePhototAction(values));
+       dispatch(uploadProfilePhototAction(values));
     },
     validationSchema: formSchema,
   });
   //store data
-  const users = useSelector(state => state?.users);
-  const { profilePhoto, loading, appErr, serverErr, userAuth } = users;
+  const users = useSelector(state => state?.Users);
+  const { profilePhoto, loading, appErr, serverErr } = users;
+  const  userAuth = users?.userAuth?.data?.user?._id
+  
   //redirect
-  if (profilePhoto) return <Navigate to={`/profile/${userAuth?._id}`} />;
+  if (profilePhoto) return <Navigate to={`/profile/${userAuth}`} />;
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

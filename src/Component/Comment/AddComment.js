@@ -11,7 +11,9 @@ const formSchema = Yup.object({
 });
 
 const AddComment = ({ postId }) => {
+  const comment = useSelector(state => state?.comment);
  
+  const { appErr, serverErr, loading } = comment;
   //dispatch
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -29,8 +31,12 @@ const AddComment = ({ postId }) => {
     },
     validationSchema: formSchema,
   });
+  
   return (
     <div className="flex flex-col justify-center items-center">
+      { appErr || serverErr ?  <h3 className="text-center text-yellow-400 text-lg">
+            {serverErr} {appErr}
+          </h3> : ""}
       <form
         onSubmit={formik.handleSubmit}
         className="mt-1 flex max-w-sm m-auto"

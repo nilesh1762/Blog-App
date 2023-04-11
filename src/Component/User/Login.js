@@ -23,19 +23,19 @@ const Login = () => {
     },
     onSubmit: values => {
     dispatch(loginUserAction(values));
-        console.log("loginUserAction+++", values);
+       
       },
       validationSchema: formSchema,
   });
 
   
   const dispatch = useDispatch();
-  const storeData = useSelector((state) => state?.Users);
-  const { userAuth, loading, serverErr, appErr } = storeData;
-  console.log(" appErr, serverErr",   userAuth, loading, serverErr, appErr )
-
+  const logindata = useSelector((state) => state?.Users);
+  const { userAuth, loading, serverErr, appErr } = logindata;
+ 
+console.log("login-er", logindata)
   if(userAuth){
-    return <Navigate  to = "/profile" />
+    return <Navigate  to = {`/profile/${userAuth?.data?.user?._id}`} />
   }
    
 
@@ -161,7 +161,7 @@ const Login = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0)">
+                    <g clipPath="url(#clip0)">
                       <path
                         d="M36.2292 29.2917H0.770833C0.345333 29.2917 0 28.9463 0 28.5208C0 28.0953 0.345333 27.75 0.770833 27.75H36.2292C36.6547 27.75 37 28.0953 37 28.5208C37 28.9463 36.6547 29.2917 36.2292 29.2917Z"
                         fill="white"

@@ -259,7 +259,7 @@ const post = createSlice({
  });
 
  builder.addCase(createPostaction.rejected, (state, action) =>{
-            
+        
     state.loading = false;
     state.appErr = action?.payload?.message;
     state.serverErr = action?.error?.message;

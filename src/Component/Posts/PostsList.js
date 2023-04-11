@@ -80,9 +80,9 @@ export default function PostsList() {
               </div>
               <div className="w-full lg:w-3/4 px-3">
                 {/* Post goes here */}
-                {appErr || serverErr ? <h1> Error </h1> :
+                {appErr || serverErr ? <h1 className="text-center text-yellow-600 text-lg"> Please Login. </h1> :
                  postList?.length <=0 ?  <h1 className="text-yellow-400 text-lg text-center"> No Post Found </h1> : postList?.map((post, id) => (
-               
+               console.log("post===", post),
 <div className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6" key={id}>
 <div className="mb-10  w-full lg:w-1/4">
   <Link to="#">
@@ -145,7 +145,7 @@ export default function PostsList() {
     </div>
     <div className="ml-3">
       <p className="text-sm font-medium text-gray-900">
-        <Link to = "#" className="text-yellow-400 hover:underline ">
+        <Link to = { `/profile/${post?.user?._id}`} className="text-yellow-400 hover:underline ">
           {post?.user?.firstName} {post?.user?.lastName}
         </Link>
       </p>

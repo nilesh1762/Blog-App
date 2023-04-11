@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import {
@@ -7,6 +8,11 @@ import {
   BookOpenIcon,
 } from "@heroicons/react/outline";
 import { PlusIcon } from "@heroicons/react/solid";
+import { current } from "@reduxjs/toolkit";
+
+
+
+const PublicNavbar = () => {
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -20,7 +26,30 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const PublicNavbar = () => {
+// function refreshPage(link){ 
+  
+//    if(link.name === "Home"){
+//     window.location.href="/"
+//   }
+// else if(link.name === "Login"){
+//   window.location.href="/login"
+  
+  
+// }
+// else if(link.name === "Register"){
+//   window.location.href="/register"
+// }
+// else if(link.name === "Posts"){
+//   window.location.href="/posts"
+// }
+// else if(link.name === "Create"){
+//   window.location.href="/create-post"
+// }
+
+ 
+// }
+
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -45,7 +74,9 @@ const PublicNavbar = () => {
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map(item => (
+                   
                     <Link
+              
                       key={item.name}
                       to={item.href}
                       className={classNames(
@@ -54,6 +85,7 @@ const PublicNavbar = () => {
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )}
+                     
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}

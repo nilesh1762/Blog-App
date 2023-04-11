@@ -9,7 +9,7 @@ export default function CommentsList({ comments }) {
     // const { userAuth } = user;
   //  const { userdata } = userAuth
     const isLoginuser = user?._id;
- console.log("comment", comments);
+
   //dispatch
   const dispatch = useDispatch();
   return (
@@ -27,14 +27,17 @@ export default function CommentsList({ comments }) {
                   <div className="flex space-x-3">
                     <img
                       className="h-6 w-6 rounded-full"
-                      src={comment?.user?.profilePhoto}
+                      src={comment?.user?.profileImage}
                       alt=""
                     />
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
+                        <Link to ={`/profile/${comment?.user?._id}`}>
                         <h3 className="text-sm font-medium text-green-400">
                           {comment?.user?.firstName} {comment?.user?.lastName}
                         </h3>
+                        </Link>
+                       
                         <p className="text-bold text-yellow-500 text-base ml-5">
                           {/* <Moment fromNow ago>
                       {comment?.createdAt}

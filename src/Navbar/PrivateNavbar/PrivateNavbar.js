@@ -16,7 +16,7 @@ const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
-  { name: "Authors", href: "/users", current: false },
+  { name: "Profile", href: "/users", current: false },
 ];
 
 function classNames(...classes) {
@@ -24,12 +24,12 @@ function classNames(...classes) {
 }
 
 const PrivateNavbar = ({ isLogin }) => {
-console.log("PrivateNavbar", isLogin)
+
   const dispatch = useDispatch();
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
-    { name: "Settingd", href: "/update-password" },
+    { name: "Setting", href: "/update-password" },
   ];
 
   return (

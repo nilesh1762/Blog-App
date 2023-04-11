@@ -143,6 +143,7 @@ export const fetchCommentAction = createAsyncThunk(
     state.serverErr = undefined;
   });
   builder.addCase(createCommentAction.rejected, (state, action) => {
+   console.log("reject-comment", action)
     state.loading = false;
     state.commentCreated = undefined;
     state.appErr = action?.payload?.message;
